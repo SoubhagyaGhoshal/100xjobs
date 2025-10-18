@@ -1,0 +1,195 @@
+{% extends 'base.html' %}
+
+{% block title %}Employer Dashboard - 100xJobs{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2><i class="bi bi-speedometer2"></i> Employer Dashboard</h2>
+            <a href="{% url 'jobs:job_create' %}" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i> Post New Job
+            </a>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="row mb-5">
+            <div class="col-md-3 mb-3">
+                <div class="card bg-primary text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3 class="mb-0">{{ total_jobs }}</h3>
+                                <p class="mb-0">Total Jobs</p>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="bi bi-briefcase display-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-success text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3 class="mb-0">{{ active_jobs }}</h3>
+                                <p class="mb-0">Active Jobs</p>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="bi bi-check-circle display-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-info text-white">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3 class="mb-0">{{ total_applications }}</h3>
+                                <p class="mb-0">Total Applications</p>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="bi bi-people display-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 mb-3">
+                <div class="card bg-warning text-dark">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between">
+                            <div>
+                                <h3 class="mb-0">{{ jobs|length }}</h3>
+                                <p class="mb-0">Jobs Posted</p>
+                            </div>
+                            <div class="align-self-center">
+                                <i class="bi bi-graph-up display-4"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- My Jobs -->
+            <div class="col-lg-8 mb-4">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0"><i class="bi bi-briefcase"></i> My Jobs</h5>
+                        <a href="{% url 'jobs:job_create' %}" class="btn btn-primary btn-sm">
+                            <i class="bi bi-plus"></i> Post Job
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        {% if jobs %}
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Job Title</th>
+                                            <th>Applications</th>
+                                            <th>Status</th>
+                                            <th>Posted</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for job in jobs %}
+                                            <tr>
+                                                <td>
+                                                    <div>
+                                                        <strong>{{ job.title }}</strong>
+                                                        <br>
+                                                        <small class="text-muted">{{ job.company.name }} • {{ job.location }}</small>
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <span class="badge bg-info">{{ job.application_count }} applications</span>
+                                                </td>
+                                                <td>
+                                                    {% if job.is_active %}
+                                                        <span class="badge bg-success">Active</span>
+                                                    {% else %}
+                                                        <span class="badge bg-secondary">Inactive</span>
+                                                    {% endif %}
+                                                </td>
+                                                <td>{{ job.created_at|date:"M d, Y" }}</td>
+                                                <td>
+                                                    <div class="btn-group btn-group-sm">
+                                                        <a href="{% url 'jobs:job_detail' job.pk %}" class="btn btn-outline-primary" title="View">
+                                                            <i class="bi bi-eye"></i>
+                                                        </a>
+                                                        <a href="{% url 'jobs:job_applications' job.pk %}" class="btn btn-outline-info" title="Applications">
+                                                            <i class="bi bi-people"></i>
+                                                        </a>
+                                                        <a href="{% url 'jobs:job_edit' job.pk %}" class="btn btn-outline-warning" title="Edit">
+                                                            <i class="bi bi-pencil"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        {% else %}
+                            <div class="text-center py-4">
+                                <i class="bi bi-briefcase display-4 text-muted"></i>
+                                <h5 class="mt-3">No jobs posted yet</h5>
+                                <p class="text-muted">Start by posting your first job to attract candidates.</p>
+                                <a href="{% url 'jobs:job_create' %}" class="btn btn-primary">Post Your First Job</a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Applications -->
+            <div class="col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="mb-0"><i class="bi bi-clock-history"></i> Recent Applications</h5>
+                    </div>
+                    <div class="card-body">
+                        {% if recent_applications %}
+                            {% for application in recent_applications %}
+                                <div class="d-flex align-items-center mb-3 pb-3 border-bottom">
+                                    <div class="flex-grow-1">
+                                        <div class="fw-bold">{{ application.applicant.get_full_name|default:application.applicant.username }}</div>
+                                        <div class="text-muted small">Applied for {{ application.job.title }}</div>
+                                        <div class="text-muted small">{{ application.created_at|timesince }} ago</div>
+                                    </div>
+                                    <div>
+                                        {% if application.status == 'pending' %}
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        {% elif application.status == 'reviewed' %}
+                                            <span class="badge bg-info">Reviewed</span>
+                                        {% elif application.status == 'shortlisted' %}
+                                            <span class="badge bg-primary">Shortlisted</span>
+                                        {% elif application.status == 'rejected' %}
+                                            <span class="badge bg-danger">Rejected</span>
+                                        {% elif application.status == 'hired' %}
+                                            <span class="badge bg-success">Hired</span>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="text-center py-4">
+                                <i class="bi bi-inbox display-4 text-muted"></i>
+                                <p class="text-muted mt-2">No applications yet</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
