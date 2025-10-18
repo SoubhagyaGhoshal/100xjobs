@@ -4,34 +4,16 @@
     {
       "src": "jobportal/wsgi.py",
       "use": "@vercel/python",
-      "config": { "maxLambdaSize": "15mb", "runtime": "python3.9" }
-    },
-    {
-      "src": "build.sh",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "staticfiles"
+      "config": { 
+        "maxLambdaSize": "15mb", 
+        "runtime": "python3.9"
       }
     }
   ],
   "routes": [
     {
-      "src": "/static/(.*)",
-      "dest": "/staticfiles/$1"
-    },
-    {
       "src": "/(.*)",
       "dest": "jobportal/wsgi.py"
     }
-  ],
-  "env": {
-    "DJANGO_SETTINGS_MODULE": "jobportal.settings",
-    "PYTHONPATH": "$PYTHONPATH:.",
-    "DATABASE_URL": "@database_url"
-  },
-  "functions": {
-    "jobportal/wsgi.py": {
-      "includeFiles": "**"
-    }
-  }
+  ]
 }

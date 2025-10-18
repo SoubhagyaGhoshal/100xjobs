@@ -1,10 +1,9 @@
 #!/bin/bash
 
+echo "Starting build process..."
+
 # Install dependencies
+echo "Installing dependencies..."
 pip install -r requirements.txt
 
-# Collect static files
-python manage.py collectstatic --noinput
-
-# Run migrations (for production database)
-python manage.py migrate --noinput
+echo "Build completed successfully!"
