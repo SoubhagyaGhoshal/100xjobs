@@ -21,7 +21,7 @@ services:
           name: 100xjobs-db
           property: connectionString
       - key: ALLOWED_HOSTS
-        value: "100xjobs-portal.onrender.com"  # Update with your actual service name
+        value: "one00xjobs.onrender.com"  # Your actual Render service name
     
   # PostgreSQL Database
   - type: pserv

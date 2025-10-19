@@ -38,7 +38,8 @@ if not DEBUG:
         '.vercel.app', 
         '.now.sh',
         '.onrender.com',  # Render domains
-        '.render.com'     # Render custom domains
+        '.render.com',    # Render custom domains
+        'one00xjobs.onrender.com'  # Your specific Render domain
     ])
 
 
