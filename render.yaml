@@ -2,18 +2,18 @@ services:
   # Web Service - Django Application
   - type: web
     name: 100xjobs-portal
-    runtime: python3
+    env: python3
     buildCommand: "./build.sh"
     startCommand: "gunicorn jobportal.wsgi:application"
-    plan: starter  # Change to 'standard' or 'pro' for production
+    plan: free  # Change to 'starter', 'standard' or 'pro' for production
     region: oregon  # Change to your preferred region
     branch: main
     healthCheckPath: /
     envVars:
       - key: PYTHON_VERSION
-        value: 3.11.0
+        value: "3.11.0"
       - key: DEBUG
-        value: false
+        value: "False"
       - key: SECRET_KEY
         generateValue: true  # Render will generate a secure secret key
       - key: DATABASE_URL
@@ -21,7 +21,7 @@ services:
           name: 100xjobs-db
           property: connectionString
       - key: ALLOWED_HOSTS
-        value: 100xjobs-portal.onrender.com  # Update with your actual service name
+        value: "100xjobs-portal.onrender.com"  # Update with your actual service name
     
   # PostgreSQL Database
   - type: pserv
