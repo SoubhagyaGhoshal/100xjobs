@@ -1,0 +1,76 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Django: Run Server",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": ["runserver", "127.0.0.1:8000"],
+            "django": true,
+            "autoReload": {
+                "enable": true
+            },
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "jobportal.settings"
+            },
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/venv/bin/python"
+        },
+        {
+            "name": "Django: Debug Server",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": ["runserver", "127.0.0.1:8000", "--noreload"],
+            "django": true,
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "jobportal.settings",
+                "DEBUG": "True"
+            },
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/venv/bin/python",
+            "stopOnEntry": false,
+            "debugOptions": ["RedirectOutput"]
+        },
+        {
+            "name": "Django: Test",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": ["test"],
+            "django": true,
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "jobportal.settings"
+            },
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/venv/bin/python"
+        },
+        {
+            "name": "Django: Shell",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": ["shell"],
+            "django": true,
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "jobportal.settings"
+            },
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/venv/bin/python"
+        },
+        {
+            "name": "Django: Migrate",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "args": ["migrate"],
+            "django": true,
+            "env": {
+                "DJANGO_SETTINGS_MODULE": "jobportal.settings"
+            },
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/venv/bin/python"
+        }
+    ]
+}
