@@ -102,8 +102,8 @@ python manage.py runserver
 
 ## 🌐 Access Points
 
-- **Main Application**: http://127.0.0.1:8000/
-- **Admin Panel**: http://127.0.0.1:8000/admin/
+- **Main Application**: https://one00xjobs.onrender.com/
+- **Admin Panel**: https://one00xjobs.onrender.com/admin/login/?next=/admin/
 
 ## 👥 Test Accounts
 
@@ -111,7 +111,7 @@ After running the setup script, you can use these test accounts:
 
 ### Administrator
 - **Username**: admin
-- **Password**: admin123
+- **Password**: ********
 - **Access**: Full system administration
 
 ### Employers (employer1-5)
@@ -216,21 +216,7 @@ python manage.py test
 
 ## 📄 License
 
-This project is open source and available under the MIT License.
-
-## 🎯 Project Goals Achieved
-
-✅ **User Roles**: Job Seekers, Employers, and Admin with appropriate permissions  
-✅ **Features**: Complete job posting, searching, and application system  
-✅ **Tech Stack**: Django backend with modern frontend using Bootstrap  
-✅ **Database**: Comprehensive models with relationships and constraints  
-✅ **UI/UX**: Professional, responsive design matching modern job boards  
-✅ **Authentication**: Secure user registration and login system  
-✅ **File Handling**: Resume uploads and document management  
-✅ **Admin Interface**: Enhanced Django admin for content management  
-✅ **Sample Data**: Automated population of test data  
-✅ **Documentation**: Comprehensive setup and usage instructions  
-✅ **Production Ready**: Deployment configuration and security settings  
+This project is open source and available under the MIT License. 
 
 ## 📞 Support
 
