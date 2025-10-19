@@ -18,8 +18,20 @@ def home(request):
     experience_level = request.GET.get("experience_level", "")
     salary_min = request.GET.get("salary_min", "")
 
-    # Start with active jobs
-    jobs = Job.objects.filter(is_active=True).select_related('company', 'category', 'posted_by')
+    # Start with active jobs - with error handling for missing tables
+    try:
+        jobs = Job.objects.filter(is_active=True).select_related('company', 'category', 'posted_by')
+    except Exception as e:
+        # If tables don't exist, return empty queryset and show setup message
+        from django.http import HttpResponse
+        return HttpResponse("""
+        <h1>Database Setup Required</h1>
+        <p>The database tables haven't been created yet. This usually happens during the first deployment.</p>
+        <p>Please wait a few minutes for the deployment to complete, then refresh this page.</p>
+        <p>If this error persists, check the deployment logs in your Render dashboard.</p>
+        <hr>
+        <p><strong>Error:</strong> {}</p>
+        """.format(str(e)))
     
     # Apply filters
     if q:
