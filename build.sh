@@ -6,10 +6,15 @@ echo "🚀 Starting Render build process..."
 echo "📦 Installing Python dependencies..."
 pip install -r requirements.txt
 
+# Run debug script to see what's happening
+echo "🔍 Running debug diagnostics..."
+python debug_build.py
+
 # Simple, direct migration approach
 echo "🗄️ Running Django migrations..."
 
 # First, ensure Django can connect to database
+echo "🔗 Testing database connection..."
 python -c "
 import django
 import os

@@ -58,19 +58,33 @@ def home(request):
         except ValueError:
             pass
 
-    # Pagination
-    paginator = Paginator(jobs, 12)  # Show 12 jobs per page
-    page_number = request.GET.get('page')
-    jobs = paginator.get_page(page_number)
+    # Pagination with error handling
+    try:
+        paginator = Paginator(jobs, 12)  # Show 12 jobs per page
+        page_number = request.GET.get('page')
+        jobs = paginator.get_page(page_number)
 
-    categories = Category.objects.all()
-    
-    context = {
-        "jobs": jobs,
-        "categories": categories,
-        "search_form": JobSearchForm(request.GET),
-    }
-    return render(request, "jobs/home.html", context)
+        categories = Category.objects.all()
+        
+        context = {
+            "jobs": jobs,
+            "categories": categories,
+            "search_form": JobSearchForm(request.GET),
+        }
+        return render(request, "jobs/home.html", context)
+    except Exception as e:
+        # If pagination or categories fail due to missing tables
+        from django.http import HttpResponse
+        return HttpResponse(f"""
+        <h1>Database Setup In Progress</h1>
+        <p>The database is still being set up. Please wait a few minutes and refresh.</p>
+        <p>If this error persists, the database migrations may not have run properly during deployment.</p>
+        <hr>
+        <p><strong>Technical Details:</strong></p>
+        <p>Error: {str(e)}</p>
+        <p>This usually means the database tables haven't been created yet.</p>
+        <p><a href="/health/">Check System Health</a></p>
+        """)
 
 
 def job_detail(request, pk):
