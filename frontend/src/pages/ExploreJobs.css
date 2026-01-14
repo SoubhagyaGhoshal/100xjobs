@@ -1,0 +1,226 @@
+.explore-jobs {
+    min-height: 100vh;
+    padding: 2rem 0;
+}
+
+.explore-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.explore-header h1 {
+    margin-bottom: 0.5rem;
+}
+
+.explore-header p {
+    color: var(--text-secondary);
+    font-size: 1.125rem;
+}
+
+.explore-content {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 2rem;
+}
+
+/* Filters Sidebar */
+.filters-sidebar {
+    position: sticky;
+    top: 100px;
+    height: fit-content;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    padding: 1.5rem;
+}
+
+.filters-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.filters-header h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.125rem;
+}
+
+.filter-group {
+    margin-bottom: 0.5rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+[data-theme="dark"] .filter-group {
+    border-bottom-color: rgba(255, 255, 255, 0.03);
+}
+
+.filter-group:last-child {
+    border-bottom: none;
+}
+
+.filter-group-header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text-primary);
+}
+
+.filter-group h4 {
+    font-size: 0.9375rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.filter-options {
+    padding-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    padding: 0.25rem 0;
+    transition: color 0.2s ease;
+}
+
+.filter-checkbox:hover {
+    color: var(--accent-blue);
+}
+
+.filter-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    accent-color: var(--accent-blue);
+    border-radius: 4px;
+}
+
+.filter-select {
+    width: 100%;
+    padding: 0.625rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    font-size: 0.875rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.filter-select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+}
+
+/* Main Content */
+.jobs-main {
+    min-height: 500px;
+}
+
+.search-bar-container {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.search-bar {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.875rem 1.25rem;
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    transition: border-color 0.2s ease;
+}
+
+.search-bar:focus-within {
+    border-color: var(--accent-blue);
+}
+
+.search-bar input {
+    flex: 1;
+    border: none;
+    background: none;
+    outline: none;
+    font-size: 1rem;
+    color: var(--text-primary);
+    font-family: inherit;
+}
+
+.search-bar input::placeholder {
+    color: var(--text-muted);
+}
+
+.sort-select {
+    padding: 0.875rem 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    background-color: var(--bg-card);
+    color: var(--text-primary);
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+    min-width: 180px;
+}
+
+.sort-select:focus {
+    outline: none;
+    border-color: var(--accent-blue);
+}
+
+.jobs-count {
+    margin-bottom: 1.5rem;
+}
+
+.jobs-count p {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+}
+
+.jobs-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.no-jobs {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    .explore-content {
+        grid-template-columns: 1fr;
+    }
+
+    .filters-sidebar {
+        position: static;
+    }
+}
+
+@media (max-width: 768px) {
+    .search-bar-container {
+        flex-direction: column;
+    }
+
+    .sort-select {
+        width: 100%;
+    }
+}

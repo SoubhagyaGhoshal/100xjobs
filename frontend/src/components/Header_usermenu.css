@@ -1,0 +1,47 @@
+/* User Menu Styles */
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--bg-secondary);
+    border-radius: 0.75rem;
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.9375rem;
+}
+
+.user-info svg {
+    color: var(--accent-blue);
+}
+
+.btn-logout {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+}
+
+@media (max-width: 768px) {
+    .user-menu {
+        gap: 0.5rem;
+    }
+
+    .user-info span {
+        display: none;
+    }
+
+    .btn-logout span {
+        display: none;
+    }
+
+    .btn-logout {
+        padding: 0.5rem;
+    }
+}

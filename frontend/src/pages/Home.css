@@ -1,0 +1,263 @@
+.home {
+    min-height: 100vh;
+}
+
+/* Hero Section */
+.hero-section {
+    padding: 6rem 0 8rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hero-badge {
+    font-size: 0.875rem;
+    margin-bottom: 1.5rem;
+}
+
+.hero-title {
+    font-size: 4.5rem;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    line-height: 1.15;
+    letter-spacing: -0.03em;
+}
+
+.highlight-text {
+    display: inline-block;
+    background-color: var(--accent-blue);
+    color: white;
+    padding: 0.125rem 0.75rem;
+    border-radius: 0.5rem;
+    margin: 0 0.25rem;
+    transform: rotate(-1deg);
+}
+
+.hero-description {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.hero-actions .btn {
+    padding: 0.875rem 2rem;
+    font-size: 1rem;
+}
+
+/* Trusted By Section */
+.trusted-section {
+    padding: 4rem 0;
+    background-color: transparent;
+    border-top: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trusted-section .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.trusted-badge {
+    display: inline-block;
+    padding: 0.5rem 1.25rem;
+    border: 1px solid var(--accent-blue);
+    border-radius: 999px;
+    font-size: 0.875rem;
+    color: var(--accent-blue);
+    background: transparent;
+    margin-bottom: 1.5rem;
+}
+
+.companies-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 3.5rem;
+    align-items: center;
+    margin-top: 2rem;
+    padding: 0 1rem;
+}
+
+.company-logo-img {
+    height: 24px;
+    object-fit: contain;
+    filter: grayscale(100%) opacity(0.6) !important;
+    transition: all 0.3s ease;
+}
+
+[data-theme="dark"] .company-logo-img {
+    filter: grayscale(100%) brightness(2) opacity(0.5);
+}
+
+.company-logo-img:hover {
+    filter: grayscale(0%) opacity(1);
+    transform: scale(1.05);
+}
+
+.company-logo-text {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+    cursor: default;
+}
+
+.company-logo-text.medium-logo {
+    font-family: 'Georgia', serif;
+    font-style: italic;
+}
+
+.company-logo-text.framer-logo {
+    font-weight: 600;
+}
+
+[data-theme="dark"] .company-logo-text {
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.company-logo-text:hover {
+    color: var(--text-primary);
+}
+
+/* Recent Jobs Section */
+.recent-jobs-section {
+    padding: 5rem 0;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.jobs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 1.5rem;
+}
+
+/* Testimonials Section */
+.testimonials-section {
+    padding: 5rem 0;
+    background-color: var(--bg-secondary);
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.testimonial-card {
+    background-color: var(--bg-card);
+    border-radius: 1rem;
+    padding: 1.5rem;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.testimonial-header {
+    display: flex;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    position: relative;
+    align-items: flex-start;
+}
+
+.testimonial-avatar-img {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonial-info {
+    flex: 1;
+}
+
+.testimonial-user-row {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.testimonial-card h4 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.verified-badge {
+    display: flex;
+    align-items: center;
+    color: #1d9bf0;
+}
+
+.testimonial-handle {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.testimonial-icon {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.testimonial-text {
+    color: var(--text-primary);
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.5rem;
+    }
+
+    .hero-description {
+        font-size: 1.125rem;
+    }
+
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .jobs-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+}

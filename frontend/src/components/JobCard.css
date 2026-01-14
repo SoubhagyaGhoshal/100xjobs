@@ -1,0 +1,111 @@
+.job-card {
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+
+.job-card-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.company-logo-wrapper {
+    flex-shrink: 0;
+}
+
+.company-logo {
+    width: 60px;
+    height: 60px;
+    border-radius: 0.5rem;
+    /* Matches SVG curve but ensures wrapping */
+    flex-shrink: 0;
+}
+
+.job-info {
+    flex: 1;
+}
+
+.job-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 0.25rem;
+}
+
+.company-name {
+    font-size: 1rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.25rem;
+}
+
+.posted-date {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+.job-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1.25rem;
+}
+
+.job-meta .badge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.825rem;
+    font-weight: 600;
+}
+
+.badge-type {
+    background-color: var(--badge-blue-bg) !important;
+    color: var(--badge-blue-text) !important;
+    border: none !important;
+}
+
+.badge-salary {
+    background-color: var(--badge-green-bg) !important;
+    color: var(--badge-green-text) !important;
+    border: none !important;
+}
+
+.badge-exp,
+.badge-loc {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+.job-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.skill-tag {
+    padding: 0.25rem 0.625rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    border-radius: 0.5rem;
+    background-color: var(--bg-secondary);
+    color: var(--text-muted);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .skill-tag {
+    border-color: rgba(255, 255, 255, 0.05);
+}
+
+@media (max-width: 768px) {
+    .job-card-header {
+        flex-direction: column;
+    }
+
+    .company-logo {
+        width: 50px;
+        height: 50px;
+    }
+}

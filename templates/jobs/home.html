@@ -1,0 +1,273 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="hero-section text-white py-5 mb-5 rounded">
+    <div class="container text-center">
+        <h1 class="display-4 fw-bold mb-3">Build Your Career with 100xJobs</h1>
+        <p class="lead mb-4">Unlock exclusive job and internship opportunities. Remote, onsite, or hybrid—we've got what you're looking for.</p>
+        <a href="#jobs-section" class="btn btn-warning btn-lg me-3">Explore Jobs</a>
+        <a href="{% url 'accounts:register' %}" class="btn btn-outline-light btn-lg">Join Now</a>
+    </div>
+</div>
+
+<!-- Search Section -->
+<div id="jobs-section" class="mb-5">
+    <div class="row mb-4">
+        <div class="col-12">
+            <h2 class="text-center mb-4">Find Your Dream Job</h2>
+            <form method="get" class="search-form">
+                <div class="row g-3">
+                    <div class="col-md-6">
+                        <input name="q" class="form-control form-control-lg" 
+                               placeholder="Search jobs by title, company, or keywords..." 
+                               value="{{ request.GET.q }}">
+                    </div>
+                    <div class="col-md-4">
+                        <input name="location" class="form-control form-control-lg" 
+                               placeholder="Location" 
+                               value="{{ request.GET.location }}">
+                    </div>
+                    <div class="col-md-2">
+                        <button class="btn btn-primary btn-lg w-100" type="submit">
+                            <i class="bi bi-search"></i> Search
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Advanced Filters -->
+                <div class="row g-3 mt-3">
+                    <div class="col-md-3">
+                        <select name="category" class="form-select">
+                            <option value="">All Categories</option>
+                            {% for cat in categories %}
+                                <option value="{{ cat.slug }}" {% if request.GET.category == cat.slug %}selected{% endif %}>
+                                    {{ cat.name }}
+                                </option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="employment_type" class="form-select">
+                            <option value="">Employment Type</option>
+                            <option value="full_time" {% if request.GET.employment_type == 'full_time' %}selected{% endif %}>Full Time</option>
+                            <option value="part_time" {% if request.GET.employment_type == 'part_time' %}selected{% endif %}>Part Time</option>
+                            <option value="contract" {% if request.GET.employment_type == 'contract' %}selected{% endif %}>Contract</option>
+                            <option value="internship" {% if request.GET.employment_type == 'internship' %}selected{% endif %}>Internship</option>
+                            <option value="freelance" {% if request.GET.employment_type == 'freelance' %}selected{% endif %}>Freelance</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="work_mode" class="form-select">
+                            <option value="">Work Mode</option>
+                            <option value="remote" {% if request.GET.work_mode == 'remote' %}selected{% endif %}>Remote</option>
+                            <option value="onsite" {% if request.GET.work_mode == 'onsite' %}selected{% endif %}>Onsite</option>
+                            <option value="hybrid" {% if request.GET.work_mode == 'hybrid' %}selected{% endif %}>Hybrid</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input name="salary_min" class="form-control" 
+                               placeholder="Min Salary" 
+                               type="number"
+                               value="{{ request.GET.salary_min }}">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Jobs Listing -->
+<div class="row">
+    <div class="col-12">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3>
+                {% if request.GET.q or request.GET.location or request.GET.category %}
+                    Search Results
+                {% else %}
+                    Recently Added Jobs
+                {% endif %}
+                <span class="badge bg-secondary">{{ jobs|length }}</span>
+            </h3>
+            <a href="{% url 'jobs:home' %}" class="btn btn-outline-primary">View All Jobs</a>
+        </div>
+        
+        <div class="row">
+            {% for job in jobs %}
+                <div class="col-md-6 col-lg-4 mb-4">
+                    <div class="card h-100 job-card">
+                        <div class="card-body">
+                            <div class="d-flex justify-content-between align-items-start mb-2">
+                                <h5 class="card-title mb-0">{{ job.title }}</h5>
+                                {% if user.is_authenticated and user.profile.is_job_seeker %}
+                                    <a href="{% url 'jobs:save_job' job.pk %}" class="btn btn-outline-secondary btn-sm save-job-btn" title="Save Job" data-job-id="{{ job.pk }}">
+                                        <i class="bi bi-bookmark"></i>
+                                    </a>
+                                {% endif %}
+                            </div>
+                            <h6 class="card-subtitle mb-2 text-primary">{{ job.company.name }}</h6>
+                            <p class="card-text text-muted small mb-2">
+                                <i class="bi bi-geo-alt"></i> {{ job.location }} • 
+                                <span class="badge bg-light text-dark">{{ job.get_work_mode_display }}</span>
+                            </p>
+                            <p class="card-text">{{ job.description|truncatewords:15 }}</p>
+                            
+                            <!-- Job Details -->
+                            <div class="mb-3">
+                                <span class="badge bg-success me-1">{{ job.get_employment_type_display }}</span>
+                                <span class="badge bg-info me-1">{{ job.get_experience_level_display }}</span>
+                                {% if job.salary_range != "Salary not specified" %}
+                                    <span class="badge bg-warning text-dark">{{ job.salary_range }}</span>
+                                {% endif %}
+                            </div>
+                            
+                            <!-- Skills -->
+                            {% if job.skills_list %}
+                                <div class="mb-3">
+                                    {% for skill in job.skills_list|slice:":3" %}
+                                        <span class="badge bg-secondary me-1">{{ skill }}</span>
+                                    {% endfor %}
+                                    {% if job.skills_list|length > 3 %}
+                                        <span class="text-muted small">+{{ job.skills_list|length|add:"-3" }} more</span>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+                            
+                            <div class="d-flex justify-content-between align-items-center">
+                                <small class="text-muted">{{ job.created_at|timesince }} ago</small>
+                                <a href="{% url 'jobs:job_detail' job.pk %}" class="btn btn-primary btn-sm">View Details</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% empty %}
+                <div class="col-12">
+                    <div class="text-center py-5">
+                        <i class="bi bi-search display-1 text-muted"></i>
+                        <h4 class="mt-3">No jobs found</h4>
+                        <p class="text-muted">Try adjusting your search criteria or browse all available positions.</p>
+                        <a href="{% url 'jobs:home' %}" class="btn btn-primary">Browse All Jobs</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+<!-- Trusted Companies Section -->
+<div class="py-5 mt-5 bg-light rounded">
+    <div class="container text-center">
+        <h3 class="mb-4">Trusted By Leading Companies</h3>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <p class="text-muted">Join thousands of companies that trust our platform to find the best talent.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.hero-section {
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+}
+
+.job-card {
+    transition: all 0.3s ease-in-out;
+    border: 1px solid #333;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    background: linear-gradient(145deg, #2a2a3e, #1e1e2e);
+    color: #ffffff;
+}
+
+.job-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 35px rgba(255,193,7,0.3);
+    border-color: #ffc107;
+}
+
+.search-form {
+    background: linear-gradient(145deg, #2a2a3e, #1e1e2e);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3);
+    border: 1px solid #333;
+}
+
+.card-title {
+    color: #ffc107 !important;
+}
+
+.card-subtitle {
+    color: #17a2b8 !important;
+}
+
+.badge {
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.btn-primary {
+    background: linear-gradient(45deg, #ffc107, #ff8f00);
+    border: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(45deg, #ff8f00, #ffc107);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,193,7,0.4);
+}
+
+.btn-outline-primary {
+    border: 2px solid #ffc107;
+    color: #ffc107;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-primary:hover {
+    background: #ffc107;
+    color: #000;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,193,7,0.4);
+}
+
+.form-control, .form-select {
+    background: #1e1e2e;
+    border: 1px solid #444;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.form-control:focus, .form-select:focus {
+    background: #2a2a3e;
+    border-color: #ffc107;
+    color: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(255,193,7,0.25);
+}
+
+.form-control::placeholder {
+    color: #aaa;
+}
+
+h2, h3, h4, h5, h6 {
+    color: #ffc107;
+}
+
+.text-muted {
+    color: #bbb !important;
+}
+
+.bg-light {
+    background: linear-gradient(145deg, #2a2a3e, #1e1e2e) !important;
+    border: 1px solid #333;
+}
+</style>
+{% endblock %}
