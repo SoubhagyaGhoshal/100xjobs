@@ -366,7 +366,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Soubhagya Ghoshal**
 
 - GitHub: [@SoubhagyaGhoshal](https://github.com/SoubhagyaGhoshal)
-- LinkedIn: [Your LinkedIn](https://linkedin.com/in/yourprofile)
 
 ---
 
