@@ -6,11 +6,11 @@
 
 **A comprehensive, secure job portal with modern UI/UX and enterprise-grade features**
 
-[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://your-deployment-url.vercel.app)
+[![Live Demo](https://img.shields.io/badge/demo-live-success)](https://100xjobs-nu.vercel.app)
 [![GitHub](https://img.shields.io/badge/github-100xjobs-blue)](https://github.com/SoubhagyaGhoshal/100xjobs)
 [![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
-[Live Demo](#) • [Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation)
+[Live Demo](https://100xjobs-nu.vercel.app) • [Features](#-features) • [Quick Start](#-quick-start) • [Documentation](#-documentation)
 
 </div>
 
